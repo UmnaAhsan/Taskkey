@@ -264,10 +264,47 @@ class _calenderState extends State<calender> {
                 ],
               ),
             ),
-            TableCalendar(
-                focusedDay: _focusedDay,
-                firstDay: DateTime(2023),
-                lastDay: DateTime(2024))
+            
+                TableCalendar(
+                      // selectedDayPredicate: (day){},
+                      // onDaySelected: (){},
+                        rowHeight: 70,
+                          calendarFormat: CalendarFormat.month,
+                          headerStyle: const HeaderStyle(
+                            titleCentered: true,
+                              leftChevronIcon: Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                              ),
+                              rightChevronIcon: Icon(
+                                Icons.arrow_forward,
+                                color: Colors.white,
+                              ),
+                              formatButtonVisible: false,
+                              titleTextStyle: TextStyle(color: Color(0xFF3580FF),fontSize: 18,fontWeight: FontWeight.w600)),
+
+                          calendarStyle: CalendarStyle(
+                            selectedDecoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.blueAccent,
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                            todayDecoration: BoxDecoration(
+                              color:
+                                  Colors.blueAccent, // Customize today's date color
+                              shape: BoxShape.circle,
+                            ),
+                            isTodayHighlighted: true,
+                            defaultTextStyle: TextStyle(color: Colors.white),
+                            weekendTextStyle: TextStyle(color: Colors.white),
+                            weekNumberTextStyle: TextStyle(color: Colors.white),
+                          ),
+                          focusedDay: DateTime.now(),
+                          firstDay: DateTime.utc(1950, 01, 01),
+                          lastDay: DateTime.utc(2050, 12, 31)),
+
+                  
           ],
         ),
       ),
