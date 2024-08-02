@@ -1,10 +1,19 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_task_app/views/app_pages/chat/models/userModel.dart';
 import 'package:todo_task_app/views/appbar/appbar.dart';
+import 'package:todo_task_app/views/bnb/bnb.dart';
 import 'package:todo_task_app/views/login/login.dart';
+import 'package:todo_task_app/views/settings/themeChanger.dart';
 import 'package:todo_task_app/views/signup/signup.dart';
 
 class signup extends StatefulWidget {
+ 
+//       : super(key: key);
   //const login({super.key});
 
   @override
@@ -16,26 +25,59 @@ TextEditingController emailController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 TextEditingController cpasswordController = TextEditingController();
 
-void createAccount()async{
-  String email = emailController.text.trim();
-    String password= passwordController.text.trim();
-      String CPassword = cpasswordController.text.trim();
+void checkValue (){
+    String email = emailController.text.trim();
+    String Password = passwordController.text.trim();
+    String Cpassword = cpasswordController.text.trim();
 
-      if(email == "" || password == "" || CPassword == ""){
-        print("please fill all the details");
-      }else if(password != CPassword){
-        print("passwords do not match");
-      }else{
-        //create new account
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email, password: password);
-          print("user created!");
-      }
- // print("hello");
+            if(email == "" || Password == "" || Cpassword == ""){
+              print("Please fill all the fields!");
+            }
+            else if(Password != Cpassword){
+              print("Passwords do not match!");
+            }
+            else{
+         //  print("Sign Up Successful!");
+            signupp(email, Password);
+            }
+  }
+ void signupp(String email, String password) async {
+        UserCredential? credential;    //usercrdential milna chahiye
+  try {
+  credential = await FirebaseAuth.instance.createUserWithEmailAndPassword
+  (email: email,password: password,);
+
+}on FirebaseAuthException catch (e) {
+  print(e.message.toString());
+  //Navigator.pop(context);
 }
-
+  if (credential != null) {
+    //print('The password provided is too weak.');
+    String uid = credential.user!.uid;         //firestore user ka data store kreingy
+    UserModel newUser = UserModel(
+      uid: uid,
+      email: email,
+      fullname: "",
+      profilepic: ""
+    );
+    await FirebaseFirestore.instance.collection("users").doc(uid).set
+    (newUser.toMap()).then((value) {
+      print("New User Created!");
+      // Navigator.push(context, MaterialPageRoute(builder: (context)=>cprofile(userModel: newUser,
+      //  firebaseUser: credential!.user!)));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>login()));
+    });
+ 
+// else if (e.code == 'email-already-in-use') {
+//     print('The account already exists for that email.');
+//   }
+// } catch (e) {
+//   print(e);
+}
+  }
   @override
   Widget build(BuildContext context) {
+     final themeChanger = Provider.of <ThemeChanger>(context);
     return SafeArea(
       child: Scaffold(backgroundColor: Colors.black,
         appBar: PreferredSize(preferredSize: Size.fromHeight(90.0),
@@ -71,7 +113,7 @@ void createAccount()async{
                     border: OutlineInputBorder(),hintText: 'Enter Your CPassword'),)),
                       SizedBox(height: 15,),
                       InkWell(onTap: (){
-                        createAccount();
+                        checkValue();
                       },
                         child: Container(height: 35,width: 340,decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),
                                          color: const Color.fromARGB(255, 8, 43, 71),boxShadow: [BoxShadow(color: Colors.blue,blurRadius: 5)]),
@@ -97,7 +139,10 @@ void createAccount()async{
                     children: [
                       Text("Have An Account",style: TextStyle(color: Colors.grey),),
                       InkWell(onTap: (){
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => login()));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) =>
+                        // login(userModel: widget.userModel, firebaseUser:widget. firebaseUser)
+                        login()
+                         ));
                       },
                         child: Text("Sign In",style: TextStyle(color: Colors.blue),))
                     ],

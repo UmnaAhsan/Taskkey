@@ -1,17 +1,55 @@
+import 'dart:js_interop';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:stacked/stacked.dart';
+import 'package:todo_task_app/views/app_pages/chat/models/userModel.dart';
 import 'package:todo_task_app/views/appbar/appbar.dart';
+import 'package:todo_task_app/views/bnb/bnb.dart';
+import 'package:todo_task_app/views/settings/themeChanger.dart';
 import 'package:todo_task_app/views/signup/signup.dart';
 
 class login extends StatefulWidget {
-  const login({super.key});
+ 
+  //const login({super.key});
 
   @override
   State<login> createState() => _loginState();
 }
 
 class _loginState extends State<login> {
+
+
+
+  TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+void loginid()async{
+  String email = emailController.text.trim();
+  String password = passwordController.text.trim();
+
+if(email == "" || password == ""){
+  print("please fill all the details");
+} 
+else{
+
+  try{
+      UserCredential userCredential = await FirebaseAuth.instance.
+ signInWithEmailAndPassword(email: email, password: password);
+ if(userCredential.user != null){
+  Navigator.popUntil(context, (route) => route.isFirst);
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>
+  bottomNB()));
+ }
+  }on FirebaseAuthException catch (ex){
+    print(ex.code.toString());
+  }
+}
+}
+
   @override
   Widget build(BuildContext context) {
+     final themeChanger = Provider.of <ThemeChanger>(context);
     return SafeArea(
       child: Scaffold(backgroundColor: Colors.black,
         appBar: PreferredSize(preferredSize: Size.fromHeight(90.0),
@@ -30,21 +68,26 @@ class _loginState extends State<login> {
                  SizedBox(height: 20,),
                  Container(height: 35,width: 340,decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),
                  ),
-                  child: TextField(
+                  child: TextField(controller: emailController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),hintText: 'Enter Your Email'),)),
                      SizedBox(height: 12,),
                  Container(height: 35,width: 340,decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),
            ),
-                  child: TextField(
+                  child: TextField(controller: passwordController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),hintText: 'Enter Your Password',),)),
                     Align(alignment: Alignment.bottomRight,
                       child: Text("Forget Password",style: TextStyle(color: Colors.black),)),
                       SizedBox(height: 15,),
-                      Container(height: 35,width: 340,decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),
-                 color: const Color.fromARGB(255, 8, 43, 71),boxShadow: [BoxShadow(color: Colors.blue,blurRadius: 5)]),
-                  child: Center(child: Text("Sign In",style: TextStyle(color: Colors.white),))),
+
+                      InkWell(onTap: (){
+                        loginid();
+                      },
+                        child: Container(height: 35,width: 340,decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),
+                                         color: const Color.fromARGB(255, 8, 43, 71),boxShadow: [BoxShadow(color: Colors.blue,blurRadius: 5)]),
+                                          child: Center(child: Text("Sign In",style: TextStyle(color: Colors.white),))),
+                      ),
                   SizedBox(height: 15,),
                   Center(child: Text("SignIn With",style: TextStyle(color: Colors.grey),)),
                   SizedBox(height: 10,),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_task_app/views/app_pages/addTask/addTask.dart';
 
@@ -6,12 +7,15 @@ import 'package:todo_task_app/views/app_pages/app2/app2.dart';
 import 'package:todo_task_app/views/app_pages/app3/app3.dart';
 //import 'package:todo_task_app/views/app_pages/app4/app4.dart';
 import 'package:todo_task_app/views/app_pages/chat/chat.dart';
+import 'package:todo_task_app/views/app_pages/chat/models/userModel.dart';
 import 'package:todo_task_app/views/app_pages/createTeam/createTeam.dart';
 import 'package:todo_task_app/views/app_pages/profile/profile.dart';
 import 'package:todo_task_app/views/profileEdit/profileEditView.dart';
 
 class bottomNB extends StatefulWidget {
-  const bottomNB({super.key});
+ 
+//       : super(key: key);
+ // const bottomNB({super.key});
 
   @override
   State<bottomNB> createState() => _bottomNBState();
@@ -19,15 +23,20 @@ class bottomNB extends StatefulWidget {
 
 class _bottomNBState extends State<bottomNB> {
 
+
   int currentTab = 0;
   Widget currentScreen = app1();
+
+  //_bottomNBState(this.userModel, this.firebaseUser);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: Colors.white,
     body: PageStorage(bucket: PageStorageBucket(), child: currentScreen),
     bottomNavigationBar: BottomAppBar(
       color: Colors.black,
-      child: Container(height: 20,
+      child: Container(height: 20,decoration: BoxDecoration(color: Colors.black,
+        boxShadow: [BoxShadow(color: Colors.white,blurRadius: 2)]),
       child: SingleChildScrollView(scrollDirection: Axis.horizontal,
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -107,9 +116,13 @@ class _bottomNBState extends State<bottomNB> {
                               leading: Icon(Icons.access_time,color: Colors.white,),
                             title: Text("Create Event",style: TextStyle(color: Colors.white),),
                             ),),SizedBox(height: 10,),
-                           Container(height: 40,width: 40,decoration: BoxDecoration(
-                         color: Colors.blue,borderRadius: BorderRadius.circular(30)),
-                         child:  Center(child: Icon(Icons.cancel,color: Colors.white,size: 40,)),
+                           InkWell(onTap: (){
+                            Navigator.pop(context);
+                           },
+                             child: Container(height: 40,width: 40,decoration: BoxDecoration(
+                                                      color: Colors.blue,borderRadius: BorderRadius.circular(30)),
+                                                      child:  Center(child: Icon(Icons.cancel,color: Colors.white,size: 40,)),
+                             ),
                            ),
       
                           ],),
@@ -130,7 +143,8 @@ class _bottomNBState extends State<bottomNB> {
               MaterialButton(
             onPressed: (){
               setState(() {
-                 currentScreen=chat();
+                // currentScreen=chat();
+                 //chat(userModel:widget.userModel, firebaseUser:widget. firebaseUser);
                 currentTab=2;
               });
             },

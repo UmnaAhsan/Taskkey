@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_task_app/views/app_pages/chat/models/userModel.dart';
 import 'package:todo_task_app/views/bnb/bnb.dart';
 
 class onboarding extends StatefulWidget {
-  const onboarding({super.key});
+  
+//       : super(key: key);
+  //const onboarding({super.key});
 
   @override
   State<onboarding> createState() => _onboardingState();
@@ -177,7 +181,10 @@ class _onboardingState extends State<onboarding> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    bottomNB()));
+                                              //bottomNB(userModel: widget.userModel, firebaseUser:widget. firebaseUser)
+                                             //bottomNB(userModel: userModel, firebaseUser: firebaseUser) 
+                                          ///   bottomNB(userModel: userModel, firebaseUser: firebaseUser)
+                                           bottomNB() ));
                                       },
                                       child: Text(
                                         "Skip",

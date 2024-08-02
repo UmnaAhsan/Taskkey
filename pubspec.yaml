@@ -41,6 +41,15 @@ dependencies:
   stacked: ^3.4.3
   stacked_services: ^1.5.0
   table_calendar: ^3.1.2
+  firebase_storage: ^11.6.9
+  image_picker: ^1.0.8
+  image_cropper: ^5.0.1
+  percent_indicator: ^4.2.3
+  firebase_messaging: ^14.7.19
+  get: ^4.6.6
+  shared_preferences: ^2.2.3
+  uuid: ^4.4.2
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:

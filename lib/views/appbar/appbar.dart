@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_task_app/views/app_pages/addTask/addTask.dart';
+import 'package:todo_task_app/views/app_pages/chat/chat.dart';
+import 'package:todo_task_app/views/app_pages/chat/models/userModel.dart';
 import 'package:todo_task_app/views/app_pages/createTeam/createTeam.dart';
 //import 'package:todo_task_app/views/app_pages/bottomSS/bottomSS.dart';
 
 class appbar extends StatefulWidget {
-  const appbar({super.key});
+  
+ // const appbar({super.key});
 
   @override
   State<appbar> createState() => _appbarState();
@@ -248,9 +252,13 @@ class _appbar6State extends State<appbar6> {
                               leading: Icon(Icons.access_time,color: Colors.white,),
                             title: Text("Create Event",style: TextStyle(color: Colors.white),),
                             ),),SizedBox(height: 10,),
-                           Container(height: 40,width: 40,decoration: BoxDecoration(
-                         color: Colors.blue,borderRadius: BorderRadius.circular(30)),
-                         child:  Center(child: Icon(Icons.cancel,color: Colors.white,size: 40,)),
+                           InkWell(onTap: (){
+                            Navigator.pop(context);
+                           },
+                             child: Container(height: 40,width: 40,decoration: BoxDecoration(
+                                                      color: Colors.blue,borderRadius: BorderRadius.circular(30)),
+                                                      child:  Center(child: Icon(Icons.cancel,color: Colors.white,size: 40,)),
+                             ),
                            ),
       
                           ],),
@@ -392,7 +400,7 @@ class _appbar10State extends State<appbar10> {
           boxShadow: [BoxShadow(color: Colors.white,blurRadius: 1)]),
           child:Center(child: InkWell(onTap: (){Navigator.pop(context);},
             child: Icon(Icons.arrow_back_ios_new,color: Colors.white,size: 15,))),),
-          SizedBox(width: 120,),
+          SizedBox(width: 100,),
            Center(
              child: Text("Profile",style: TextStyle(
               color: Colors.white,fontSize: 20,fontWeight: FontWeight.w700)),
@@ -404,3 +412,116 @@ class _appbar10State extends State<appbar10> {
   }
 }
 
+class appbar11 extends StatefulWidget {
+  const appbar11({super.key});
+
+  @override
+  State<appbar11> createState() => _appbar11State();
+}
+
+class _appbar11State extends State<appbar11> {
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+      padding: const EdgeInsets.all(2),
+      child: SingleChildScrollView(scrollDirection: Axis.horizontal,
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+             Container(height: 30,width: 30,
+            decoration: BoxDecoration(color: Colors.black,borderRadius: BorderRadius.circular(30),
+            boxShadow: [BoxShadow(color: Colors.white,blurRadius: 1)]),
+            child:Center(child: InkWell(onTap: (){Navigator.pop(context);},
+              child: Icon(Icons.arrow_back_ios_new,color: Colors.white,size: 15,))),),
+            SizedBox(width: 100,),
+             Center(
+               child: Text("Task Status",style: TextStyle(
+                color: Colors.white,fontSize: 20,fontWeight: FontWeight.w700)),
+             ),
+              SizedBox(width: 100,),
+             // Icon(Icons.multiple_stop_sharp,color: Colors.white
+               Container(height: 30,width: 30,
+          decoration: BoxDecoration(color: Colors.black,borderRadius: BorderRadius.circular(30),
+          boxShadow: [BoxShadow(color: Colors.white,blurRadius: 1)]),
+          child:Center(child: InkWell(onTap: (){Navigator.pop(context);},
+            child: Icon(Icons.multiple_stop_sharp,color: Colors.white,size: 15,))),),
+              
+          ],),
+      ),
+    );
+   
+  }
+}
+
+
+class appbar12 extends StatefulWidget {
+  const appbar12({super.key});
+
+  @override
+  State<appbar12> createState() => _appbar12State();
+}
+
+class _appbar12State extends State<appbar12> {
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+      padding: const EdgeInsets.all(2),
+      child: SingleChildScrollView(scrollDirection: Axis.horizontal,
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+             Container(height: 30,width: 30,
+            decoration: BoxDecoration(color: Colors.black,borderRadius: BorderRadius.circular(30),
+            boxShadow: [BoxShadow(color: Colors.white,blurRadius: 1)]),
+            child:Center(child: InkWell(onTap: (){Navigator.pop(context);},
+              child: Icon(Icons.arrow_back_ios_new,color: Colors.white,size: 15,))),),
+            SizedBox(width: 100,),
+             Center(
+               child: Text("Language",style: TextStyle(
+                color: Colors.white,fontSize: 20,fontWeight: FontWeight.w700)),
+             ),
+            
+              
+          ],),
+      ),
+    );
+   
+  }
+}
+
+
+class appbar13 extends StatefulWidget {
+  const appbar13({super.key});
+
+  @override
+  State<appbar13> createState() => _appbar13State();
+}
+
+class _appbar13State extends State<appbar13> {
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+      padding: const EdgeInsets.all(2),
+      child: SingleChildScrollView(scrollDirection: Axis.horizontal,
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+             Container(height: 30,width: 30,
+            decoration: BoxDecoration(color: Colors.black,borderRadius: BorderRadius.circular(30),
+            boxShadow: [BoxShadow(color: Colors.white,blurRadius: 1)]),
+            child:Center(child: InkWell(onTap: (){
+           //   Navigator.push(context,MaterialPageRoute(builder: (context)=>
+            //chat()
+            //));
+            },
+              child: Icon(Icons.arrow_back_ios_new,color: Colors.white,size: 15,))),),
+            SizedBox(width: 100,),
+             Center(
+               child: Text("Chat",style: TextStyle(
+                color: Colors.white,fontSize: 20,fontWeight: FontWeight.w700)),
+             ),
+            
+              
+          ],),
+      ),
+    );
+   
+  }
+}

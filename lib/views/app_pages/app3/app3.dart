@@ -28,7 +28,7 @@ class _app3State extends State<app3> {
           children: [
           Container(height: 23,width: 65,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
           color: Colors.black,
-          boxShadow: [BoxShadow(color: Colors.blue,blurRadius: 4)]),
+          boxShadow: [BoxShadow(color: Colors.blue,blurRadius: 2)]),
             child: Center(child: Text("Favourite",style: TextStyle(color: Colors.white),))),
           Text("Recents",style: TextStyle(color: Colors.white),),
           Text("All",style: TextStyle(color: Colors.white),),

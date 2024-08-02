@@ -1,10 +1,22 @@
+import 'dart:html';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_task_app/views/app_pages/chat/firebaseHelper.dart';
+import 'package:todo_task_app/views/app_pages/chat/models/userModel.dart';
+import 'package:todo_task_app/views/app_pages/join_team/jointeam.dart';
+import 'package:todo_task_app/views/app_pages/myTask/myTask.dart';
 import 'package:todo_task_app/views/appbar/appbar.dart';
 import 'package:todo_task_app/views/profileEdit/profileEditView.dart';
 import 'package:todo_task_app/views/settings/settingsView.dart';
+import 'package:todo_task_app/views/settings/themeChanger.dart';
 
 class profile extends StatefulWidget {
-  const profile({super.key});
+ 
+
+  //const profile({super.key, required this.userModel, required this.firebaseUser});
+ // const profile({super.key});
 
   @override
   State<profile> createState() => _profileState();
@@ -13,6 +25,7 @@ class profile extends StatefulWidget {
 class _profileState extends State<profile> {
   @override
   Widget build(BuildContext context) {
+     final themeChanger = Provider.of <ThemeChanger>(context);
     return Scaffold(backgroundColor: Colors.black,
        appBar:
         PreferredSize(preferredSize: Size.fromHeight(90.0),
@@ -20,7 +33,7 @@ class _profileState extends State<profile> {
       body: SingleChildScrollView(scrollDirection: Axis.vertical,
         child: Column(children: [
           Stack(children: [
-             Container(height: 200,width: 400,
+             Container(height: 300,width: 400,
                           child: Image.asset("assets/images/Circle.png",fit: BoxFit.cover,)),
                           SingleChildScrollView(scrollDirection: Axis.vertical,
                             child: Column(children: [
@@ -36,14 +49,15 @@ class _profileState extends State<profile> {
                               SizedBox(height: 10,),
 
                                 InkWell(onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>profileedit()));
+                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                               profileedit(userModel: userModel, firebaseUser: firebaseUser)
+                                 ))
                                 },
                                   child: Container(height: 30,width: 70,decoration: BoxDecoration
                                                     (color: Colors.black,borderRadius: BorderRadius.circular(10),
                                                     boxShadow: [BoxShadow(color: Colors.blue,blurRadius: 2)]),
                                                     child: Center(child: Text("Edit",style: TextStyle(color: Colors.white),)),
-                                                    ),
- ),
+                                                    ),),
                                                   SizedBox(height: 6,),
 
                                                   Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -73,15 +87,20 @@ class _profileState extends State<profile> {
                             child: Text("My Project",style: TextStyle(color: Colors.white),),
                                                     ),Spacer(),Icon(Icons.arrow_forward_ios_sharp,color: Colors.white,size: 15,)
                                                   ],),),SizedBox(height: 7,),
-                                                   Container(height: 50,width: 350,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                                  color: Colors.black, boxShadow: [BoxShadow(color: Colors.white,blurRadius: 1),]),
-                                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                    children: [
-                                                    Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("Join Team",style: TextStyle(color: Colors.white),),
-                                                    ),Spacer(),Icon(Icons.arrow_forward_ios_sharp,color: Colors.white,size: 15,)
-                                                  ],),),SizedBox(height: 7,),
+
+                                                   InkWell(onTap: (){
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>jointeam()));
+                                                   },
+                                                     child: Container(height: 50,width: 350,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                                                                                       color: Colors.black, boxShadow: [BoxShadow(color: Colors.white,blurRadius: 1),]),
+                                                                                                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                      children: [
+                                                      Padding(
+                                                                                 padding: const EdgeInsets.all(8.0),
+                                                                                 child: Text("Join Team",style: TextStyle(color: Colors.white),),
+                                                      ),Spacer(),Icon(Icons.arrow_forward_ios_sharp,color: Colors.white,size: 15,)
+                                                                                                       ],),),
+                                                   ),SizedBox(height: 7,),
 
                                                    InkWell(onTap: (){
                                                     Navigator.push(context, MaterialPageRoute(builder: (context)=>settings()));
@@ -97,15 +116,19 @@ class _profileState extends State<profile> {
                                                                                                        ],),),
                                                    ),SizedBox(height: 7,),
 
-                                                   Container(height: 50,width: 350,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                                  color: Colors.black, boxShadow: [BoxShadow(color: Colors.white,blurRadius: 1),]),
-                                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                    children: [
-                                                    Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("My Task",style: TextStyle(color: Colors.white),),
-                                                    ),Spacer(),Icon(Icons.arrow_forward_ios_sharp,color: Colors.white,size: 15,)
-                                                  ],),),SizedBox(height: 7,),
+                                                   InkWell(onTap: (){
+                                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>myTask()));
+                                                   },
+                                                     child: Container(height: 50,width: 350,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                                                                                       color: Colors.black, boxShadow: [BoxShadow(color: Colors.white,blurRadius: 1),]),
+                                                                                                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                      children: [
+                                                      Padding(
+                                                                                 padding: const EdgeInsets.all(8.0),
+                                                                                 child: Text("My Task",style: TextStyle(color: Colors.white),),
+                                                      ),Spacer(),Icon(Icons.arrow_forward_ios_sharp,color: Colors.white,size: 15,)
+                                                                                                       ],),),
+                                                   ),SizedBox(height: 7,),
                                     
                                       ],),
                           )])

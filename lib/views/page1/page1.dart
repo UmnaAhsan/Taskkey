@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_task_app/views/app_pages/chat/models/userModel.dart';
 import 'package:todo_task_app/views/onboarding_screen/onboarding.dart';
 
 class page1 extends StatefulWidget {
-  const page1({super.key});
+  
+//       : super(key: key);
+ // const page1({super.key});
 
   @override
   State<page1> createState() => _page1State();
@@ -35,7 +39,10 @@ class _page1State extends State<page1> {
                        Text("describes better than words",style: TextStyle(color: Colors.grey),),
                         SizedBox(height: 15,),
                         InkWell(onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>onboarding()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                          //onboarding(userModel: userModel, firebaseUser: firebaseUser)
+                        //  onboarding(userModel: widget.userModel, firebaseUser:widget. firebaseUser)
+                        onboarding()));
                         },
                           child: Container(height: 50,width: 300,decoration: BoxDecoration(color: Colors.blue,
                             borderRadius: BorderRadius.circular(10),boxShadow: 

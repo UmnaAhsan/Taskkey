@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_task_app/views/app_pages/app2/app2.dart';
 import 'package:todo_task_app/views/appbar/appbar.dart';
 import 'package:todo_task_app/views/page1/page1.dart';
+import 'package:todo_task_app/views/settings/themeChanger.dart';
 
 class app1 extends StatefulWidget {
   const app1({super.key});
@@ -12,31 +14,13 @@ class app1 extends StatefulWidget {
 
 class _app1State extends State<app1> {
   Color otherColor = Color.fromARGB(255, 15, 13, 49);
-//   bool _switchValue = true;
-
-//   final _lightTheme = ThemeData(brightness: Brightness.light,textTheme: 
-//   TextTheme(bodyText2: TextStyle(color: Colors.black)));
-
-// final _darkTheme = ThemeData(brightness: Brightness.dark,textTheme: 
-//   TextTheme(bodyText2: TextStyle(color: Colors.white)));
-  
-//   var isDark = false;
-//   void changeTheme(state){
-//  if(state == true){
-//   changeTheme(ThemeData.dark());
-//  }else{
-//   changeTheme(ThemeData.light());
-//  }
-//   }
 
   @override
   Widget build(BuildContext context) {
+     final themeChanger = Provider.of <ThemeChanger>(context);
     return MaterialApp(debugShowCheckedModeBanner: false,
-    //   theme: _switchValue ? _lightTheme : _darkTheme,
-    //  debugShowCheckedModeBanner: false,
       home:
     Scaffold(backgroundColor: Colors.black,
-     // backgroundColor:_switchValue ? Colors.white : Colors.black,
        appBar:
         PreferredSize(preferredSize: Size.fromHeight(90.0),
       child: appbar3()),
@@ -50,13 +34,7 @@ class _app1State extends State<app1> {
                     Text("Habits Together",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
 
                     SizedBox(height: 10,),
-                      //  Switch(value: isDark, onChanged: (state){
-                      //  // print('printing $state');
-                      //  setState(() {
-                      //    changeTheme(state);
-                      //  });
-                      //  //changeTheme(state);
-                      //  }),
+                     
                     SingleChildScrollView(scrollDirection: Axis.horizontal,
                       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
